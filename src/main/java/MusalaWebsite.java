@@ -1,13 +1,18 @@
 import com.shaft.driver.SHAFT;
 import com.shaft.dsl.gui.Button;
 import com.shaft.dsl.gui.Element;
+import com.shaft.dsl.gui.Image;
 import org.openqa.selenium.By;
 
 public class MusalaWebsite {
     SHAFT.GUI.WebDriver driver;
     public Button Careers = new Button(By.xpath("//*[@id='navbar']/..//a[text()='Careers'][1]"));
+    public Button Company = new Button(By.xpath("//*[@id='navbar']/..//a[text()='Company'][1]"));
     public Button CheckOpenPositions = new Button(By.xpath("//*[text()='Check our open positions']"));
+    public Button ContactUs= new Button(By.xpath("//*[text()='Contact us']"));
     public Button Apply= new Button(By.className("btn-apply"));
+    public Button fbImg= new Button(By.className("musala-icon-facebook"));
+
     public MusalaWebsite(SHAFT.GUI.WebDriver driver) {
         this.driver = driver;
         Element.setDriver(driver.getDriver());
@@ -39,6 +44,21 @@ public class MusalaWebsite {
             String link = driver.element().getAttribute(By.xpath("//article["+i+"]//a"),"href");
             System.out.println("For More Info: "+ link);
         }
+    }
+
+    public void fillForm(String name, String email, String mobile, String subject, String msg)
+    {
+        driver.element().type(By.name("your-name"), name);
+        driver.element().type(By.name("your-email"), email);
+        driver.element().type(By.name("mobile-number"), mobile);
+        driver.element().type(By.name("your-subject"), subject);
+        driver.element().type(By.name("your-message"), msg);
+        driver.element().click(By.className("btn-cf-submit"));
+    }
+    public void checkInvalidError(String errorMsg)
+    {
+        driver.element().waitForElementToBePresent(By.xpath("//*[@name=\"your-email\"]/following::span[1]"), 10, true);
+        driver.assertThat().element(By.xpath("//*[@name=\"your-email\"]/following::span[1]")).text().isEqualTo(errorMsg).perform();
 
     }
 }

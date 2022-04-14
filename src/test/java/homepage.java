@@ -32,26 +32,20 @@ public class homepage {
     @Test(dataProvider = "data-provider")
     public void testcase1(String email) {
         musalaWebsite.openMainPage();
-        driver.element().click(By.xpath("//*[text()='Contact us']"));
-        driver.element().type(By.name("your-name"), "MElgazzar");
-        driver.element().type(By.name("your-email"), email);
-        driver.element().type(By.name("mobile-number"), "0100010010");
-        driver.element().type(By.name("your-subject"), "support");
-        driver.element().type(By.name("your-message"), "call me back!");
-        driver.element().click(By.className("btn-cf-submit"));
-        driver.element().waitForElementToBePresent(By.xpath("//*[@name=\"your-email\"]/following::span[1]"), 10, true);
-        driver.assertThat().element(By.xpath("//*[@name=\"your-email\"]/following::span[1]")).text().isEqualTo("The e-mail address entered is invalid.").perform();
-    }
+        musalaWebsite.ContactUs.click();
+        musalaWebsite.fillForm("MElgazzar",email,"0100010010" ,"support","call me back!");
+        musalaWebsite.checkInvalidError("The e-mail address entered is invalid.");
+       }
 
     @Test
     public void testcase2() {
         musalaWebsite.openMainPage();
-        driver.element().click(By.xpath("//*[@id='navbar']/..//a[text()='Company'][1]"));
-        driver.assertThat().browser().url().isEqualTo("https://www.musala.com/company/").perform();
-        driver.assertThat().element(By.xpath("//*[text()='Leadership']")).exists().perform();
-        driver.element().click(By.className("musala-icon-facebook"));
+        musalaWebsite.Company.click();
+        musalaWebsite.checkUrlText("https://www.musala.com/company/");
+        musalaWebsite.containsHeader("Leadership");
+        musalaWebsite.fbImg.click();
         driver.element().switchToWindow(driver.element().getWindowHandles().get(1));
-        driver.assertThat().browser().url().isEqualTo("https://www.facebook.com/MusalaSoft?fref=ts").perform();
+        musalaWebsite.checkUrlText("https://www.facebook.com/MusalaSoft?fref=ts");
         driver.element().switchToWindow(driver.element().getWindowHandles().get(0));
     }
 
@@ -78,6 +72,7 @@ public class homepage {
         musalaWebsite.CheckOpenPositions.click();
         musalaWebsite.printPositionsInfo("Sofia");
     }
+
     @AfterClass
     public void afterClass() {
         driver.quit();
