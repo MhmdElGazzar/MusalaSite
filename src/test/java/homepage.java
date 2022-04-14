@@ -1,5 +1,4 @@
 import com.shaft.driver.SHAFT;
-import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -8,13 +7,13 @@ import org.testng.annotations.Test;
 public class homepage {
     SHAFT.GUI.WebDriver driver;
     SHAFT.TestData.JSON testData;
-    MusalaWebsite musalaWebsite;
+    MusalaWebsite MSite;
 
     @BeforeClass
     public void beforeClass() {
         driver = new SHAFT.GUI.WebDriver();
         testData = new SHAFT.TestData.JSON("testData.json");
-        musalaWebsite= new MusalaWebsite(driver);
+        MSite = new MusalaWebsite(driver);
     }
 
 
@@ -31,46 +30,46 @@ public class homepage {
 
     @Test(dataProvider = "data-provider")
     public void testcase1(String email) {
-        musalaWebsite.openMainPage();
-        musalaWebsite.ContactUs.click();
-        musalaWebsite.fillForm("MElgazzar",email,"0100010010" ,"support","call me back!");
-        musalaWebsite.checkInvalidError("The e-mail address entered is invalid.");
+        MSite.openMainPage();
+        MSite.ContactUs.click();
+        MSite.fillForm("MElgazzar",email,"0100010010" ,"support","call me back!");
+        MSite.checkInvalidError("The e-mail address entered is invalid.");
        }
 
     @Test
     public void testcase2() {
-        musalaWebsite.openMainPage();
-        musalaWebsite.Company.click();
-        musalaWebsite.checkUrlText("https://www.musala.com/company/");
-        musalaWebsite.containsHeader("Leadership");
-        musalaWebsite.fbImg.click();
+        MSite.openMainPage();
+        MSite.Company.click();
+        MSite.checkUrlText("https://www.musala.com/company/");
+        MSite.containsHeader("Leadership");
+        MSite.fbImg.click();
         driver.element().switchToWindow(driver.element().getWindowHandles().get(1));
-        musalaWebsite.checkUrlText("https://www.facebook.com/MusalaSoft?fref=ts");
+        MSite.checkUrlText("https://www.facebook.com/MusalaSoft?fref=ts");
         driver.element().switchToWindow(driver.element().getWindowHandles().get(0));
     }
 
 
     @Test
     public void testcase3() {
-        musalaWebsite.openMainPage();
-        musalaWebsite.Careers.click();
-        musalaWebsite.CheckOpenPositions.click();
-        musalaWebsite.checkUrlText("https://www.musala.com/careers/join-us/");
-        musalaWebsite.openVacancy("Automation QA Engineer");
-        musalaWebsite.containsHeader("General description");
-        musalaWebsite.containsHeader("Requirements");
-        musalaWebsite.containsHeader("Responsibilities");
-        musalaWebsite.containsHeader("What we offer");
-        musalaWebsite.Apply.shouldExist();
-        musalaWebsite.Apply.click();
+        MSite.openMainPage();
+        MSite.Careers.click();
+        MSite.CheckOpenPositions.click();
+        MSite.checkUrlText("https://www.musala.com/careers/join-us/");
+        MSite.openVacancy("Automation QA Engineer");
+        MSite.containsHeader("General description");
+        MSite.containsHeader("Requirements");
+        MSite.containsHeader("Responsibilities");
+        MSite.containsHeader("What we offer");
+        MSite.Apply.shouldExist();
+        MSite.Apply.click();
     }
 
     @Test
     public void testcase4() {
-        musalaWebsite.openMainPage();
-        musalaWebsite.Careers.click();
-        musalaWebsite.CheckOpenPositions.click();
-        musalaWebsite.printPositionsInfo("Sofia");
+        MSite.openMainPage();
+        MSite.Careers.click();
+        MSite.CheckOpenPositions.click();
+        MSite.printPositionsInfo("Sofia");
     }
 
     @AfterClass
