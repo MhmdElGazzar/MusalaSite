@@ -1,3 +1,8 @@
 {
-  "emailErrorMsg": "The e-mail address entered is invalid."
+  "emailErrorMsg": "The e-mail address entered is invalid.",
+  "invalidEmail1": "email.ee",
+  "invalidEmail2": "email@d@ss",
+  "invalidEmail3": "emaild.ss@s",
+  "invalidEmail4": "email@ddd",
+  "invalidEmail5": "ema.il@d"
 }

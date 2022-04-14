@@ -21,7 +21,12 @@ public class homepage {
 
     @DataProvider(name = "data-provider")
     public Object[][] dpMethod() {
-        return new Object[][]{{"email.ee"}, {"email@d@ss"}, {"emaild.ss@s"}, {"email@ddd"}, {"ema.il@d"}};
+        return new Object[][]{
+                {testData.getTestData("invalidEmail1")},
+                {testData.getTestData("invalidEmail2")},
+                {testData.getTestData("invalidEmail3")},
+                {testData.getTestData("invalidEmail4")},
+                {testData.getTestData("invalidEmail5")}};
     }
 
     @Test(dataProvider = "data-provider")
