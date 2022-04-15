@@ -1,0 +1,7 @@
+
+allure-results/
+extent-reports/
+allure-report/
+generatedReport/
+generatedReport*.zip
+target/
